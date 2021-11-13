@@ -10,6 +10,8 @@ public class Static : MonoBehaviour
     public float _PI;
     [Header("是否輸入任意鍵")]
     public bool _pressKey;
+    [Header("是否按下Space鍵")]
+    public bool _pressSpace = false;
     [Header("遊戲經過時間")]
     public float _gamingTime;
     [Range(0f, 1f)]
@@ -21,8 +23,6 @@ public class Static : MonoBehaviour
     public Vector3 _dot1 = new Vector3(1, 1, 1);
     public Vector3 _dot2 = new Vector3(22, 22, 22);
     public float _distance;
-    [Header("是否按下Space鍵")]
-    public bool _pressSpace = false;
 
     void Start()
     {

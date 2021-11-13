@@ -13,8 +13,10 @@ public class NonStatic : MonoBehaviour
     public SpriteRenderer _image2;
     public Color _spriteRenderer1;
     public Color _spriteRenderer2;
-    [Header("圖片1旋轉角度")]
+    [Header("圖片1旋轉角度及翻轉")]
     public Vector3 _angle;
+    public float _angleVelocity = 6f;
+    public bool _image1FlipY = false;
     [Header("2D剛體位置移動")]
     public Rigidbody2D _rigidbody2D;
     public Vector2 _velocity = new Vector2(0f, 6f);
@@ -37,19 +39,19 @@ public class NonStatic : MonoBehaviour
         _image1.color = _spriteRenderer1;
         _image2.color = _spriteRenderer2;
 
-        _image1.flipY = true;
+        _image1FlipY = true;
+        _image1.flipY = _image1FlipY;
     }
 
     void Update()
     {
-        _angle.z = 6f * Time.deltaTime;
+        _angle.z = _angleVelocity * Time.deltaTime;
         _image1.transform.Rotate(_angle.x, _angle.y, _angle.z);
 
         if(_rigidbody2D.position.y >= 3.7f) { _state = -1; }
         else if (_rigidbody2D.position.y <= -3.7f) { _state = 1; }
 
         _rigidbody2D.MovePosition(_rigidbody2D.position + _state * _velocity * Time.deltaTime);
-        _position.x = _rigidbody2D.position.x;
-        _position.y = _rigidbody2D.position.y;
+        _position = _rigidbody2D.position;
     }
 }
